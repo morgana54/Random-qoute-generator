@@ -107,14 +107,3 @@ class QuoteBox extends React.Component {
 }
 
 export default QuoteBox;
-
-
-// najpierw funkcjonalność, a potem to wystylujesz - TAK KAŻDY PROJEKT, ŻEBY BYŁO SZYBKO
-// - w tym kolor body i jego losowanie w reakcie
-
-// PERHAPS INCORRECT APPROACH:
-// components to be done: (all in Content.js)
-// - Text 
-// - Author 
-// - NewQuoteBtn
-// - (potem na koniec) Twitter/Tumblr
