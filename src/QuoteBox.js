@@ -1,5 +1,8 @@
 import Content from './Content';
 import React from 'react';
+import { FaTwitterSquare } from 'react-icons/fa';
+
+
 
 class QuoteBox extends React.Component {
   constructor(props) {
@@ -19,15 +22,33 @@ class QuoteBox extends React.Component {
         {quote: 'When I was 5 years old, my mother always told me that happiness was the key to life. When I went to school, they asked me what I wanted to be when I grew up. I wrote down ‘happy’. They told me I didn’t understand the assignment, and I told them they didn’t understand life.', author: 'John Lennon'}
       ],
       currentQuote: 'Whatever the mind of man can conceive and believe, it can achieve.',
-      currentAuthor: 'Napoleon Hill'
+      currentAuthor: 'Napoleon Hill',
+      colors: [  
+        '#16a085',
+      '#27ae60',
+      '#2c3e50',
+      '#f39c12',
+      '#e74c3c',
+      '#9b59b6',
+      '#FB6964',
+      '#342224',
+      '#472E32',
+      '#BDBB99',
+      '#77B1A9',
+      '#73A857'
+    ],
+      currentColor: '#16a085'
     }
-
-    // this.handleClick = this.handleClick.bind(this)
   }
 
-  randomIndex(quotes) {
-    let index = Math.floor(Math.random() * quotes.length)
+  randomIndex(array) {
+    let index = Math.floor(Math.random() * array.length)
     return index
+  }
+
+  randomColor() {
+    let colors = this.state.colors
+    return colors[this.randomIndex(colors)]
   }
 
   handleClick() {
@@ -35,22 +56,53 @@ class QuoteBox extends React.Component {
     quotes = quotes[this.randomIndex(quotes)]
     let quote = quotes.quote
     let author = quotes.author
-    
+    let color = this.randomColor()
+
+    // setTimeout(() => {
+    //   set
+    // }, 350);
     this.setState({
      currentQuote: quote,
-     currentAuthor: author
+     currentAuthor: author,
+     currentColor: color,
     })
   }
+
+  // ustawić animację na text jeszcze! --> używając transition, opacity, setTimeout!!!
 
   render() {
     let quote = this.state.currentQuote
     let author = this.state.currentAuthor
     return (
-      <div id='quote-box' className='wrapper'>
+    <main 
+    className='main'
+    style={{backgroundColor: this.state.currentColor}}>
+      <div 
+      id='quote-box' 
+      style={{color: this.state.currentColor}}
+      className='wrapper'>
         <Content quote={quote} author={author}/>
-        <button onClick={() => this.handleClick()} id='new-quote'>New Quote</button>
+        <div className='buttons'>
+          <a 
+          id='tweet-quote'
+          title="Tweet it!"
+          target="_blank"
+          href="https://twitter.com/intent/tweet"
+          className='btn btn-twitter'
+          style={{backgroundColor: this.state.currentColor}}
+          >
+            <FaTwitterSquare className='icon' />
+          </a>
+          <button 
+          onClick={() => this.handleClick()} 
+          id='new-quote' 
+          style={{backgroundColor: this.state.currentColor}}
+          className='btn'>New Quote</button>
+        </div>
       </div>
-    );
+    </main>
+
+    ); 
   }
 }
 
